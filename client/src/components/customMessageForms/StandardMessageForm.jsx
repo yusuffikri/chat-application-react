@@ -5,6 +5,8 @@ const StandardMessageForm = () => {
     const [attachment, setAttachment] = useState("");
     const [preview, setPreview] = useState("");
 
+    const handleChange = (e) => setMessage(e.target.value);
+
   return (
     <div className='message-form-container'>
         { preview && (
@@ -13,8 +15,23 @@ const StandardMessageForm = () => {
                 <XMarkIcon className='message-form-icon-x' onClick={() => { setPreview(""); setAttachment("");}}/>
             </div>
         )}
-        <div>
-            asdfasf
+        <div className='message-form'>
+           <div className='message-form-input-container'>
+                <input type="text" className='message-form-input' value={message} onChange={handleChange} placeholder='Send a message...' />
+           </div>
+           <div className='message-form-icons'>
+            <Dropzone acceptedFiles='.jpg,.jpeg,.png' multiple={false} noClick={true}
+            onDrop={(acceptedFiles) => {
+                setAttachment(acceptedFiles[0]);
+                setPreview(URL.createObjectURL(acceptedFiles));
+            }}>
+            {({getRootProps,getInputProps, open}) => (
+                <div {...getRootProps()}>
+                    <input {...getInputProps()} />
+                </div>
+            )}
+            </Dropzone>
+           </div>
         </div>
     </div>
   )
