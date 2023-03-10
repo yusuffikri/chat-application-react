@@ -10,7 +10,7 @@ const CustomerHeader = ({chat}) => {
         </div>
         <div>
             <PhoneIcon className='icon-phone'/>
-            <p className='header-text'>{chat.description}</p>
+            {chat.description !== "⬅️ ⬅️ ⬅️" ? (<p className='header-text'>{chat.description}</p>) : (<p className='header-text'>No chat selected.</p>)}
         </div>
     </div>
   )
