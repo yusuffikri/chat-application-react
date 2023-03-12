@@ -21,7 +21,15 @@ router.post("/text", async (req, res) => {
 
     await axios.post(
       `https://api.chatengine.io/chats/${activeChatId}/messages/`,
-      { text: response.data.choices[0].message.content },
+      { text: response.data.choices[0].message.content,
+        model:"text-davinci-003",
+        prompt: text,
+        temperature: 0.5,
+        max_tokens: 2048,
+        top_p:1,
+        frequency_penalty:0.5,
+        presence_penalty:0,
+     },
       {
         headers: {
           "Project-ID": process.env.PROJECT_ID,
