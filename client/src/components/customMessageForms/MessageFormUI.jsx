@@ -1,9 +1,12 @@
 import React from 'react'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import XMarkIcon, { PaperAirplaneIcon, PaperClipIcon } from '@heroicons/react/24/solid'
 import Dropzone from 'react-dropzone';
 
-const MessageFormUI = () => {
+const MessageFormUI = ({setAttachment, message, handleChange, handleSubmit,}) => {
+
+  const [preview, setPreview] = useState("");
+
   return (
     <div className='message-form-container'>
         { preview && (
