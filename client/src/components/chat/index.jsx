@@ -3,6 +3,7 @@ import { useMultiChatLogic, MultiChatSocket, MultiChatWindow} from 'react-chat-e
 import Header from '@/components/customHeader'
 import StandardMessageForm from '@/components/customMessageForms/StandardMessageForm'
 import Ai from '@/components/customMessageForms/Ai.jsx'
+import AiCode from '@/components/customMessageForms/AiCode.jsx'
 
 const Chat = () => {
     const chatProps = useMultiChatLogic(
@@ -21,6 +22,9 @@ const Chat = () => {
         renderMessageForm={(props) => {
           if (chatProps.chat?.title.startsWith("AiChat_")) {
             return <Ai props={props} activeChat={chatProps.chat} />
+          }
+          if (chatProps.chat?.title.startsWith("AiCode_")) {
+            return <AiCode props={props} activeChat={chatProps.chat} />
           }
 
           return (
