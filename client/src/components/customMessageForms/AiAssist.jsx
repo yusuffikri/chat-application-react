@@ -23,6 +23,7 @@ const AiAssist = ({props, activeChat}) => {
     const [message, setMessage] = useState("");
     const [attachment, setAttachment] = useState("");
     const [triggerAssist] = usePostAiAssistMutation();
+    const [appendText, setAppendText] = useState("");
 
     const handleChange = (e) => setMessage(e.target.value);
 
@@ -44,6 +45,20 @@ const AiAssist = ({props, activeChat}) => {
     };
 
     const debouncedValue = useDebounce(message, 1000);
+
+    useEffect(() => {
+      if (debouncedValue){
+        const form = {text : message};
+        triggerAssist(form);
+      }
+    }, [debouncedValue]);
+
+    const handleKeyDown = (e) => {
+      if (e.keyCode === 9 || e.keyCode === 13){
+        e.preventDefault(); 
+        setMessage(`${message} ${appendText} `)
+      }
+    }
 
   return (
     <MessageFormUI
