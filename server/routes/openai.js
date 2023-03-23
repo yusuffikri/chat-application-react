@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.post("/text", async (req, res) => {
   try {
-    const { text, activeChatId } = req.body
+    const {text} = req.body
 
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
@@ -23,9 +23,9 @@ router.post("/text", async (req, res) => {
       `https://api.chatengine.io/chats/${activeChatId}/messages/`,
       { text: response.data.choices[0].message.content,
         model:"text-davinci-003",
-        prompt: text,
+        prompt: `finish my thought: ${text}`,
         temperature: 0.5,
-        max_tokens: 2048,
+        max_tokens: 1024,
         top_p:1,
         frequency_penalty:0.5,
         presence_penalty:0,
