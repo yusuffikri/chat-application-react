@@ -1,6 +1,22 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { usePostAiAssistMutation } from '../../state/api';
 import MessageFormUI from './MessageFormUI'
+
+function useDebounce(value,delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeOut(() => {
+       setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    }
+  }, [value, delay])
+
+  return debouncedValue
+}
 
 const AiAssist = ({props, activeChat}) => {
 
@@ -26,6 +42,8 @@ const AiAssist = ({props, activeChat}) => {
         setMessage("");
         setAttachment(""); 
     };
+
+    const debouncedValue = useDebounce(message, 1000);
 
   return (
     <MessageFormUI

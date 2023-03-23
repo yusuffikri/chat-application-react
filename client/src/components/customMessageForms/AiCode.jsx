@@ -12,7 +12,7 @@ const AiCode = ({props, activeChat}) => {
 
     const handleSubmit = async () => {
         const date = new Date().toISOString().replace("T", " ").replace("Z", `${Math.floor(Math.random() * 1000)}-08:00`);
-        const at =  attachment ? [{blob : attachment, file: attachment.name}]:[];
+        const at =  attachment ? [{blob zx: attachment, file: attachment.name}]:[];
         const form = {
             attachments: at,
             created: date,
