@@ -22,7 +22,7 @@ const AiAssist = ({props, activeChat}) => {
 
     const [message, setMessage] = useState("");
     const [attachment, setAttachment] = useState("");
-    const [triggerAssist] = usePostAiAssistMutation();
+    const [triggerAssist, resultAssist] = usePostAiAssistMutation();
     const [appendText, setAppendText] = useState("");
 
     const handleChange = (e) => setMessage(e.target.value);
@@ -58,7 +58,14 @@ const AiAssist = ({props, activeChat}) => {
         e.preventDefault(); 
         setMessage(`${message} ${appendText} `)
       }
+      setAppendText('');
     }
+
+    useEffect(() => {
+      if (resultAssist.data?.text){
+        setAppendText(resultAssist.data?.text)
+      }
+    }, [resultAssist])
 
   return (
     <MessageFormUI
@@ -66,6 +73,8 @@ const AiAssist = ({props, activeChat}) => {
     message={message}
     handleChange={handleChange}
     handleSubmit={handleSubmit}
+    appendText={appendText}
+    handleKeyDown={handleKeyDown}
     />
   )
 }
