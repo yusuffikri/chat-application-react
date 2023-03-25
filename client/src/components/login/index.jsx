@@ -27,7 +27,7 @@ const Login = ({ setUser, setSecret }) => {
   return (
     <div className="login-page">
       <div className="login-container">
-        <h2 className="title">CHATGPT APP</h2>
+        <h2 className="title">UCUPCHAT APP</h2>
         <p
           className="register-change"
           onClick={() => setIsRegister(!isRegister)}
